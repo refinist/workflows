@@ -2,7 +2,7 @@
 
 [English](README.md) | 中文
 
-一套可复用的 GitHub Actions workflows 和 actions 集合，适用于 Node.js 项目。
+一套可复用的 GitHub Actions workflows 和 actions 集合，适用于 Node.js 项目。支持使用 npm 的 [OpenID Connect (OIDC) 可信发布](https://docs.npmjs.com/trusted-publishers)，无需配置长期有效的 token。
 
 ## 特性
 
@@ -49,6 +49,10 @@ on:
 jobs:
   release:
     uses: refinist/workflows/.github/workflows/release.yml@v1
+
+    permissions:
+      contents: write
+      id-token: write
 ```
 
 **输入参数：**

@@ -2,7 +2,7 @@
 
 English | [中文](README.zh-CN.md)
 
-A collection of reusable GitHub Actions workflows and actions for Node.js projects.
+A collection of reusable GitHub Actions workflows and actions for Node.js projects. Supports npm's [OpenID Connect (OIDC) trusted publishing](https://docs.npmjs.com/trusted-publishers), eliminating the need for long-lived tokens.
 
 ## Features
 
@@ -49,6 +49,10 @@ on:
 jobs:
   release:
     uses: refinist/workflows/.github/workflows/release.yml@v1
+
+    permissions:
+      contents: write
+      id-token: write
 ```
 
 **Inputs:**
