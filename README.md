@@ -1,4 +1,4 @@
-# Workflows Library
+# Github Workflows
 
 English | [中文](README.zh-CN.md)
 
@@ -40,6 +40,7 @@ Use this workflow to automate your release process:
 
 ```yaml
 name: Release
+
 on:
   push:
     tags:
@@ -47,14 +48,7 @@ on:
 
 jobs:
   release:
-    uses: refinist/workflows/.github/workflows/release.yml@v1
-    with:
-      changelogithub: true
-      build: 'pnpm run build'
-      publish: true
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    uses: refinist/workflows/release.yml@v1
 ```
 
 **Inputs:**
