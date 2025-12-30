@@ -1,0 +1,16 @@
+{
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "format": "prettier --write .",
+    "release": "bumpp && ./release.sh"
+  },
+  "prettier": "@refinist/prettier-config",
+  "devDependencies": {
+    "@refinist/prettier-config": "^0.0.4",
+    "bumpp": "^10.3.2",
+    "prettier": "^3.7.4"
+  },
+  "packageManager": "pnpm@10.26.2"
+}
