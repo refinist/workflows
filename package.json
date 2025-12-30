@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "format": "prettier --write .",
-    "release": "bumpp && ./release.sh"
+    "release": "bumpp"
   },
   "prettier": "@refinist/prettier-config",
   "devDependencies": {
