@@ -48,7 +48,7 @@ on:
 
 jobs:
   release:
-    uses: refinist/workflows/release.yml@v1
+    uses: refinist/workflows/.github/workflows/release.yml@v1
 ```
 
 **Inputs:**
