@@ -1,0 +1,74 @@
+name: Unit Test
+
+on:
+  workflow_call:
+    inputs:
+      os-matrix:
+        required: false
+        type: string
+        default: '"ubuntu-slim", "windows-latest"'
+
+      node-versions:
+        required: false
+        type: string
+        default: '20,22,24,25'
+
+      skip-lint:
+        required: false
+        type: boolean
+        default: false
+
+      lint:
+        required: false
+        type: string
+        default: pnpm lint
+
+      skip-typecheck:
+        required: false
+        type: boolean
+        default: false
+
+      typecheck:
+        required: false
+        type: string
+        default: pnpm typecheck
+
+      build:
+        required: false
+        type: string
+        default: pnpm build
+
+      test:
+        required: false
+        type: string
+        default: pnpm test
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: ${{ fromJson(format('[{0}]', inputs.os-matrix)) }}
+        node-version: ${{ fromJson(format('[{0}]', inputs.node-versions)) }}
+      fail-fast: false
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Setup Env
+        uses: refinist/workflows/setup-env@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Type Check
+        run: ${{ inputs.typecheck }}
+        if: ${{ !inputs.skip-typecheck }}
+
+      - name: Lint
+        run: ${{ inputs.lint }}
+        if: ${{ !inputs.skip-lint }}
+
+      - name: Build
+        run: ${{ inputs.build }}
+
+      - name: Unit Test
+        run: ${{ inputs.test }}

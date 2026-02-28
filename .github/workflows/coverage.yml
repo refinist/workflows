@@ -1,0 +1,34 @@
+name: Coverage
+
+on:
+  workflow_call:
+    inputs:
+      test:
+        required: false
+        type: string
+        default: pnpm test --coverage
+
+      build:
+        required: false
+        type: string
+        default: pnpm build
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Setup Env
+        uses: refinist/workflows/setup-env@v1
+
+      - name: Build
+        run: ${{ inputs.build }}
+
+      - name: Coverage
+        run: ${{ inputs.test }}
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          use_oidc: true
